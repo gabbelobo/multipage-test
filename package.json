@@ -10,6 +10,8 @@
   },
   "devDependencies": {
     "typescript": "~5.8.3",
-    "vite": "^6.3.5"
-  }
+    "vite": "^6.3.5",
+    "glob": "^11.0.2"
+  },
+  "dependencies": {}
 }
