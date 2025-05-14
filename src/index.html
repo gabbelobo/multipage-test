@@ -3,19 +3,106 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
-    <link rel="stylesheet" href="./style.css" />
+    <meta
+      name="description"
+      content="Gabriel Löfgren Lobo - Full-Stack Engineer specializing in React & Node.js with 6+ years of experience developing web applications across diverse industries."
+    />
+    <meta
+      name="keywords"
+      content="Full-Stack Engineer, React, Node.js, TypeScript, Web Developer, Frontend, Backend, AWS, DevOps"
+    />
+    <meta name="author" content="Gabriel Löfgren Lobo" />
+    <meta property="og:title" content="Gabriel Löfgren Lobo | Developer" />
+    <meta
+      property="og:description"
+      content="Full-Stack Engineer specializing in React & Node.js with expertise in leading front-end teams and implementing CI/CD pipelines."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://gabriellobo.com/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Gabriel Löfgren Lobo | Developer" />
+    <meta
+      name="twitter:description"
+      content="Full-Stack Engineer specializing in React & Node.js with 6+ years of experience."
+    />
+    <title>Gabriel Löfgren Lobo | Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/about">About</a>
-    </nav>
+    <!-- CRT Screen Effects -->
+    <div class="scanlines"></div>
+    <div class="screen-flicker"></div>
+    <div class="rgb-noise"></div>
 
-    <main>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is a simple landing page.</p>
-    </main>
-    <script type="module" src="/main.ts"></script>
+    <div id="boot-screen" class="boot-screen" style="display: none">
+      <div class="boot-text">INITIALIZING SYSTEM...</div>
+      <div class="loading">
+        <div id="loading-bar" class="loading-bar"></div>
+      </div>
+      <div class="boot-text">
+        LOADING DEVELOPER PROFILE<span class="blink">_</span>
+      </div>
+    </div>
+
+    <div id="main-content">
+      <div class="container">
+        <header>
+          <div class="power-btn" id="power-btn"></div>
+          <h1>GABRIEL LÖFGREN LOBO</h1>
+          <p>FULL-STACK ENGINEER | REACT & NODE.JS SPECIALIST</p>
+          <div class="command-prompt">cd /gabriel/portfolio</div>
+        </header>
+
+        <nav>
+          <ul>
+            <li><a href="/" class="tab-link active">ABOUT</a></li>
+            <li><a href="/experience" class="tab-link">EXPERIENCE</a></li>
+            <li><a href="/skills" class="tab-link">SKILLS</a></li>
+            <li><a href="/projects" class="tab-link">PROJECTS</a></li>
+            <li><a href="/education" class="tab-link">EDUCATION</a></li>
+            <li><a href="/contact" class="tab-link">CONTACT</a></li>
+          </ul>
+        </nav>
+
+        <div id="content" class="tab-content active">
+          <h2>ABOUT:/ <span class="blink">_</span></h2>
+          <p>
+            Full-Stack Engineer with 6+ years of experience developing web
+            applications across diverse industries. Demonstrated expertise in
+            leading front-end teams, establishing development standards, and
+            implementing CI/CD pipelines. Strong track record of improving
+            application performance and user experience.
+          </p>
+          <p>
+            Proficient in modern JavaScript frameworks, with specialized
+            knowledge in React, Next.js, TypeScript, and Node.js. Adept at
+            DevOps, cloud infrastructure (AWS), and system integrations.
+          </p>
+          <p>LOCATION: Florianópolis, Santa Catarina, Brasil</p>
+          <p>
+            LANGUAGES: Portuguese (Native), English (Fluent), Swedish
+            (Intermediate)
+          </p>
+        </div>
+
+        <footer>
+          <p>
+            Made with &lt;/&gt; and green pixels | © 2025 Gabriel Löfgren Lobo
+          </p>
+          <p>
+            This site is best viewed on a CRT monitor with the lights off
+            <span class="blink">_</span>
+          </p>
+        </footer>
+      </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
   </body>
 </html>
