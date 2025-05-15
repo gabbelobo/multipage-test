@@ -162,21 +162,6 @@ function recordVisit(): void {
 }
 
 /**
- * Check if boot animation has ever been played
- * @returns Boolean indicating if boot animation has been played before
- */
-function hasBootAnimationPlayed(): boolean {
-  return localStorage.getItem("bootAnimationPlayed") === "true";
-}
-
-/**
- * Record that boot animation has been played
- */
-function recordBootAnimationPlayed(): void {
-  localStorage.setItem("bootAnimationPlayed", "true");
-}
-
-/**
  * Handle boot sequence animation
  */
 function handleBootSequence(): void {
