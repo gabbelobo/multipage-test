@@ -75,8 +75,11 @@ body {
   transform-origin: center;
   transform: scaleY(0);
   opacity: 0;
+}
+
+#main-content[data-animated="on"] {
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s 0.4s;
+    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s;
 }
 
 /* Turn on animation */
@@ -84,8 +87,6 @@ body {
   transform: scaleY(1);
   opacity: 1;
   visibility: visible;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s;
 }
 
 /* Screen turn off animation */
@@ -93,8 +94,6 @@ body {
   transform: scaleY(0);
   opacity: 0;
   visibility: hidden;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s 0.4s;
 }
 
 .container {

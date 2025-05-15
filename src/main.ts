@@ -180,6 +180,8 @@ function handleBootSequence(): void {
     return;
   }
 
+  mainContent.setAttribute("data-animated", "on");
+
   // Show boot animation for first visit or after 24 hours
   bootScreen.style.display = "flex";
   mainContent.setAttribute("data-state", "off");
