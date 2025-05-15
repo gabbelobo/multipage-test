@@ -18,6 +18,16 @@
     <div class="screen-flicker"></div>
     <div class="rgb-noise"></div>
 
+    <div id="boot-screen" class="boot-screen" style="display: none">
+      <div class="boot-text">INITIALIZING SYSTEM...</div>
+      <div class="loading">
+        <div id="loading-bar" class="loading-bar"></div>
+      </div>
+      <div class="boot-text">
+        LOADING DEVELOPER PROFILE<span class="blink">_</span>
+      </div>
+    </div>
+
     <div id="main-content">
       <div class="container">
         <header>
@@ -28,6 +38,7 @@
         </header>
 
         <nav>
+          <button class="menu-btn">MENU [+]</button>
           <ul>
             <li><a href="/" class="tab-link">ABOUT</a></li>
             <li><a href="/experience" class="tab-link">EXPERIENCE</a></li>

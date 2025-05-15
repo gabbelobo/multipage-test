@@ -28,10 +28,11 @@ function setupPowerButton(): void {
       const mainContent: HTMLElement | null =
         document.getElementById("main-content");
       if (mainContent) {
-        mainContent.classList.add("screen-off");
+        // Force a reflow to ensure the animation plays
+        void mainContent.offsetWidth;
+        mainContent.setAttribute("data-state", "off");
 
         setTimeout(() => {
-          // Clear the lastVisit from localStorage to reset boot animation
           localStorage.removeItem("lastVisit");
           window.location.href = "/";
         }, 400);
@@ -84,12 +85,58 @@ function initCommandPrompts(): void {
 }
 
 /**
+ * Initialize menu functionality
+ */
+function initHamburgerMenu(): void {
+  const menuBtn = document.querySelector(".menu-btn");
+  const navMenu = document.querySelector("nav ul");
+
+  if (menuBtn && navMenu) {
+    menuBtn.addEventListener("click", () => {
+      menuBtn.classList.toggle("active");
+      navMenu.classList.toggle("active");
+
+      // Update button text
+      const button = menuBtn as HTMLButtonElement;
+      button.textContent = button.classList.contains("active")
+        ? "MENU [-]"
+        : "MENU [+]";
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (
+        !menuBtn.contains(e.target as Node) &&
+        !navMenu.contains(e.target as Node)
+      ) {
+        menuBtn.classList.remove("active");
+        navMenu.classList.remove("active");
+        const button = menuBtn as HTMLButtonElement;
+        button.textContent = "MENU [+]";
+      }
+    });
+
+    // Close menu when clicking a link
+    const navLinks = document.querySelectorAll("nav a");
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        menuBtn.classList.remove("active");
+        navMenu.classList.remove("active");
+        const button = menuBtn as HTMLButtonElement;
+        button.textContent = "MENU [+]";
+      });
+    });
+  }
+}
+
+/**
  * Initialize all page functionality after boot
  */
 function initPageFunctionality(): void {
   setupPowerButton();
   initCrtEffects();
   initCommandPrompts();
+  initHamburgerMenu();
 }
 
 /**
@@ -115,42 +162,61 @@ function recordVisit(): void {
 }
 
 /**
+ * Check if boot animation has ever been played
+ * @returns Boolean indicating if boot animation has been played before
+ */
+function hasBootAnimationPlayed(): boolean {
+  return localStorage.getItem("bootAnimationPlayed") === "true";
+}
+
+/**
+ * Record that boot animation has been played
+ */
+function recordBootAnimationPlayed(): void {
+  localStorage.setItem("bootAnimationPlayed", "true");
+}
+
+/**
  * Handle boot sequence animation
  */
 function handleBootSequence(): void {
   const bootScreen: HTMLElement | null = document.getElementById("boot-screen");
   const mainContent: HTMLElement | null =
     document.getElementById("main-content");
+  const loadingBar: HTMLElement | null = document.getElementById("loading-bar");
 
-  if (!bootScreen || !mainContent) return;
+  if (!bootScreen || !mainContent || !loadingBar) return;
 
-  // If recent visit, skip boot animation
+  // If visited within 24 hours, skip boot animation
   if (hasVisitedRecently()) {
     bootScreen.style.display = "none";
     mainContent.style.display = "block";
+    void mainContent.offsetWidth; // Force reflow
+    mainContent.setAttribute("data-state", "on");
     initPageFunctionality();
     return;
   }
 
   // Show boot animation for first visit or after 24 hours
-  const loadingBar: HTMLElement | null = document.getElementById("loading-bar");
-  if (!loadingBar) return;
-
-  // Show boot screen
   bootScreen.style.display = "flex";
-  mainContent.style.display = "none";
+  mainContent.style.display = "block";
+  mainContent.setAttribute("data-state", "off");
 
-  // Simulate loading
+  // Reset loading bar
+  loadingBar.style.width = "0%";
+
+  // Force a reflow
+  void loadingBar.offsetWidth;
+
+  // Start loading animation
   loadingBar.style.width = "100%";
 
   // After loading completes, show main content
   setTimeout(() => {
     bootScreen.style.display = "none";
-    mainContent.style.display = "block";
-    mainContent.classList.add("screen-on");
+    void mainContent.offsetWidth; // Force reflow
+    mainContent.setAttribute("data-state", "on");
     initPageFunctionality();
-
-    // Store current time as last visit
     recordVisit();
   }, 3000);
 }
@@ -159,13 +225,21 @@ function handleBootSequence(): void {
  * Main initialization function on DOM content loaded
  */
 function init(): void {
-  // Check if we're on the index page with boot screen
+  const mainContent: HTMLElement | null =
+    document.getElementById("main-content");
+  if (!mainContent) return;
+
+  // Check if we're on a page with boot screen
   const bootScreen: HTMLElement | null = document.getElementById("boot-screen");
 
   if (bootScreen) {
+    // We have a boot screen, handle the sequence
     handleBootSequence();
   } else {
-    // For pages other than index that don't have boot screen
+    // No boot screen, ensure main content is visible and initialized
+    mainContent.style.display = "block";
+    void mainContent.offsetWidth; // Force reflow
+    mainContent.setAttribute("data-state", "on");
     initPageFunctionality();
   }
 }
