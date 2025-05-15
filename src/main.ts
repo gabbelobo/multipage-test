@@ -95,6 +95,7 @@ function initHamburgerMenu(): void {
     menuBtn.addEventListener("click", () => {
       menuBtn.classList.toggle("active");
       navMenu.classList.toggle("active");
+      document.body.classList.toggle("menu-open");
 
       // Update button text
       const button = menuBtn as HTMLButtonElement;
@@ -111,6 +112,7 @@ function initHamburgerMenu(): void {
       ) {
         menuBtn.classList.remove("active");
         navMenu.classList.remove("active");
+        document.body.classList.remove("menu-open");
         const button = menuBtn as HTMLButtonElement;
         button.textContent = "MENU [+]";
       }
@@ -122,6 +124,7 @@ function initHamburgerMenu(): void {
       link.addEventListener("click", () => {
         menuBtn.classList.remove("active");
         navMenu.classList.remove("active");
+        document.body.classList.remove("menu-open");
         const button = menuBtn as HTMLButtonElement;
         button.textContent = "MENU [+]";
       });
