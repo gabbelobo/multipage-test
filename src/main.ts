@@ -190,8 +190,6 @@ function handleBootSequence(): void {
   // If visited within 24 hours, skip boot animation
   if (hasVisitedRecently()) {
     bootScreen.style.display = "none";
-    mainContent.style.display = "block";
-    void mainContent.offsetWidth; // Force reflow
     mainContent.setAttribute("data-state", "on");
     initPageFunctionality();
     return;
@@ -199,7 +197,6 @@ function handleBootSequence(): void {
 
   // Show boot animation for first visit or after 24 hours
   bootScreen.style.display = "flex";
-  mainContent.style.display = "block";
   mainContent.setAttribute("data-state", "off");
 
   // Reset loading bar
@@ -237,7 +234,6 @@ function init(): void {
     handleBootSequence();
   } else {
     // No boot screen, ensure main content is visible and initialized
-    mainContent.style.display = "block";
     void mainContent.offsetWidth; // Force reflow
     mainContent.setAttribute("data-state", "on");
     initPageFunctionality();
